@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/services"
+            android:icon="@drawable/ic_menu_camera"
+            android:title="Услуги" />
+
+        <item
+            android:id="@+id/news"
+            android:icon="@drawable/ic_menu_gallery"
+            android:title="Новости" />
+
+        <item
+            android:id="@+id/order"
+            android:icon="@drawable/ic_menu_slideshow"
+            android:title="Заказ" />
+
+        <item
+            android:id="@+id/ask"
+            android:icon="@drawable/ic_menu_slideshow"
+            android:title="Задать вопрос" />
+    </group>
+
+    <item android:title="Контакты">
+        <menu>
+            <item
+                android:id="@+id/adress"
+                android:icon="@drawable/ic_menu_share"
+                android:title="Адрес" />
+            <item
+                android:id="@+id/nav_share"
+                android:icon="@drawable/ic_menu_share"
+                android:title="Телефон" />
+            <item
+                android:id="@+id/nav_send"
+                android:icon="@drawable/ic_menu_send"
+                android:title="Группа ВК" />
+
+            <item
+                android:id="@+id/nav_send2"
+                android:icon="@drawable/ic_menu_send"
+                android:title="Почта" />
+        </menu>
+    </item>
+
+</menu>
