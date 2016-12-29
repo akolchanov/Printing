@@ -12,8 +12,12 @@
     tools:context="printing.printing.MainActivity"
     tools:showIn="@layout/app_bar_main">
 
-    <TextView
+    <ListView
+        android:id="@+id/list"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Здесь можно будет заказать изготовление чего-то" />
+        />
+
+
+
 </RelativeLayout>

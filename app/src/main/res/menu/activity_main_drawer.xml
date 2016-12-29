@@ -5,7 +5,7 @@
         <item
             android:id="@+id/services"
             android:icon="@drawable/ic_menu_camera"
-            android:title="Услуги" />
+            android:title="Главная" />
 
         <item
             android:id="@+id/news"
@@ -28,20 +28,12 @@
             <item
                 android:id="@+id/adress"
                 android:icon="@drawable/ic_menu_share"
-                android:title="Адрес" />
+                android:title="Сыктывкар, ул. Савина, 81" />
             <item
                 android:id="@+id/nav_share"
                 android:icon="@drawable/ic_menu_share"
-                android:title="Телефон" />
-            <item
-                android:id="@+id/nav_send"
-                android:icon="@drawable/ic_menu_send"
-                android:title="Группа ВК" />
+                android:title="Тел: 28-46-71" />
 
-            <item
-                android:id="@+id/nav_send2"
-                android:icon="@drawable/ic_menu_send"
-                android:title="Почта" />
         </menu>
     </item>
 
