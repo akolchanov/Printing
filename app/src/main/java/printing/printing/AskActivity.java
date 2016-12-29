@@ -1,8 +1,6 @@
 package printing.printing;
 
-import android.content.ClipData;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -17,35 +15,23 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.webkit.WebView;
-import android.widget.AdapterView;
-import android.widget.ListView;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
 
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.util.ArrayList;
 
-public class OrderActivity extends AppCompatActivity
+public class AskActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
-
-
-    ArrayList<ItemModel> dataModels;
-    ListView listView;
-    private static CustomItemAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_order);
-
+        setContentView(R.layout.activity_ask);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -60,52 +46,50 @@ public class OrderActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
 
 
-        listView=(ListView)findViewById(R.id.list);
+        TextView infoV = (TextView) findViewById(R.id.orderInfo);
+        TextView priceV = (TextView) findViewById(R.id.Price);
+        TextView descriptionV = (TextView) findViewById(R.id.Description);
 
 
-        dataModels= new ArrayList<>();
+        Button createOrderf = (Button) findViewById(R.id.createOrder);
 
-        adapter= new CustomItemAdapter(dataModels,getApplicationContext());
+        createOrderf.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                switch (v.getId()) {
+                    case R.id.createOrder:
+                        EditText questionField = (EditText) findViewById(R.id.question);
 
-        listView.setAdapter(adapter);
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                        final String question = questionField.getText().toString();
 
-                ItemModel itemModel = dataModels.get(position);
+                        new SendOrder(question).execute();
 
-                Intent intent = new Intent(getBaseContext(), CreateOrder.class);
+                        Snackbar.make(v, "Спасибо за сообщение. \nМы свяжемся с вами в ближайшее время.", Snackbar.LENGTH_LONG)
+                                .setAction("No action", null).show();
+                        break;
 
-                intent.putExtra("title", itemModel.getTitle());
-                intent.putExtra("description", itemModel.getDescription());
-                intent.putExtra("price", itemModel.getPrice());
-
-                startActivity(intent);
-
-                Snackbar info = Snackbar.make(view, itemModel.getTitle()+"\n"+itemModel.getTitle()+" API: ", Snackbar.LENGTH_LONG)
-                        .setAction("No action", null);
-
-                View infoView = info.getView();
-                infoView.setBackgroundColor(Color.BLUE);
-                info.show();
+                }
             }
         });
 
-
-        new ParseTask().execute();
-
     }
 
-    private class ParseTask extends AsyncTask<Void, Void, String> {
+    private class SendOrder extends AsyncTask<Void, Void, String> {
 
         HttpURLConnection urlConnection = null;
         BufferedReader reader = null;
         String resultJson = "";
 
+        String question;
+
+        SendOrder(String question) {
+            this.question = question;
+        }
+
         @Override
         protected String doInBackground(Void... params) {
             try {
-                URL url = new URL("http://kolchanov.info/item.json");
+
+                URL url = new URL("http://kolchanov.info/ask.js?question=" + question);
 
                 urlConnection = (HttpURLConnection) url.openConnection();
                 urlConnection.setRequestMethod("GET");
@@ -130,37 +114,10 @@ public class OrderActivity extends AppCompatActivity
         }
 
         @Override
-        protected void onPostExecute(String strJson) {
-            super.onPostExecute(strJson);
+        protected void onPostExecute(String answer) {
+            super.onPostExecute(answer);
 
-            JSONObject dataJsonObj = null;
-
-            try {
-                dataJsonObj = new JSONObject(strJson);
-                JSONArray newsList = dataJsonObj.getJSONArray("items");
-
-                dataModels= new ArrayList<>();
-
-                for (int i = 0; i < newsList.length(); i++) {
-                    JSONObject news = newsList.getJSONObject(i);
-                    String title = news.getString("title");
-                    String description = news.getString("description");
-                    String price = news.getString("price");
-
-                    dataModels.add(new ItemModel(title, description, "1", price));
-
-                }
-
-                listView = (ListView)findViewById(R.id.list);
-
-                adapter= new CustomItemAdapter(dataModels,getApplicationContext());
-
-                listView.setAdapter(adapter);
-
-
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
+            Log.d("Printing", answer);
         }
     }
 
@@ -182,7 +139,6 @@ public class OrderActivity extends AppCompatActivity
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-
         int id = item.getItemId();
 
         if (id == R.id.action_settings) {
@@ -195,7 +151,6 @@ public class OrderActivity extends AppCompatActivity
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
-
         int id = item.getItemId();
 
         if (id == R.id.services) {
