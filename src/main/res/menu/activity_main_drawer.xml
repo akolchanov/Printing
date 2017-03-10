@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/services"
+            android:icon="@drawable/ic_menu_camera"
+            android:title="Главная" />
+
+        <item
+            android:id="@+id/news"
+            android:icon="@drawable/ic_menu_gallery"
+            android:title="Новости" />
+
+        <item
+            android:id="@+id/order"
+            android:icon="@drawable/ic_menu_slideshow"
+            android:title="Заказ" />
+
+        <item
+            android:id="@+id/list"
+            android:icon="@drawable/ic_menu_slideshow"
+            android:title="Список заказов" />
+
+        <item
+            android:id="@+id/ask"
+            android:icon="@drawable/ic_menu_slideshow"
+            android:title="Задать вопрос" />
+    </group>
+
+    <item android:title="Контакты">
+        <menu>
+            <item
+                android:id="@+id/adress"
+                android:icon="@drawable/ic_menu_share"
+                android:title="Сыктывкар, ул. Савина, 81" />
+            <item
+                android:id="@+id/nav_share"
+                android:icon="@drawable/ic_menu_share"
+                android:title="Тел: 28-46-71" />
+
+        </menu>
+    </item>
+
+</menu>
