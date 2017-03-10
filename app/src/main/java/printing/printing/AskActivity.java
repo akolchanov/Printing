@@ -165,6 +165,10 @@ public class AskActivity extends AppCompatActivity
             Intent intent = new Intent(this, OrderActivity.class);
             startActivity(intent);
 
+        } else if (id == R.id.list) {
+            Intent intent = new Intent(this, OrderListActivity.class);
+            startActivity(intent);
+
         } else if (id == R.id.ask) {
             Intent intent = new Intent(this, AskActivity.class);
             startActivity(intent);
