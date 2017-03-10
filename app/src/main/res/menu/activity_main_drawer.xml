@@ -18,6 +18,11 @@
             android:title="Заказ" />
 
         <item
+            android:id="@+id/list"
+            android:icon="@drawable/ic_menu_slideshow"
+            android:title="Список заказов" />
+
+        <item
             android:id="@+id/ask"
             android:icon="@drawable/ic_menu_slideshow"
             android:title="Задать вопрос" />

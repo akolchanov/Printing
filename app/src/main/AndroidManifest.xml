@@ -3,6 +3,8 @@
     package="printing.printing">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+
 
     <application
         android:allowBackup="true"
@@ -57,6 +59,16 @@
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.ASK" />
+
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name=".OrderListActivity"
+            android:label="@string/app_name"
+            android:theme="@style/AppTheme.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.LIST" />
 
             </intent-filter>
         </activity>
