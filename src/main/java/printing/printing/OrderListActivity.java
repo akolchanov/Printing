@@ -136,6 +136,9 @@ public class OrderListActivity extends AppCompatActivity
                 for (int i = 0; i < newsList.length(); i++) {
                     JSONObject news = newsList.getJSONObject(i);
                     String id = news.getString("id");
+
+                    Log.d("Info", "You may use this ID to change status of order: " + id);
+                    
                     String title = news.getString("title");
                     String comment = news.getString("comment");
                     String status = news.getString("status");
